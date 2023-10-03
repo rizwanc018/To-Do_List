@@ -1,8 +1,8 @@
 import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Checkbox from '@mui/material/Checkbox';
-import { deleteToDo } from '../redux/toDoSlice';
+import { deleteToDo, toggleComplete } from '../redux/toDoSlice';
 
 const TodoList = () => {
     const todos = useSelector((state) => state.toDoList)
@@ -12,18 +12,28 @@ const TodoList = () => {
         dispatch(deleteToDo(id));
     }
 
+    const handleComplete = (id) => {
+        dispatch(toggleComplete(id));
+    }
+
     return (
         <List>
             {todos.map((todo) => (
                 <ListItem key={todo.id} >
-                    <Checkbox edge='start' aria-label="task finished" onClick={() => handleFinish(todo.id)} />
+                    <Checkbox
+                        edge='start'
+                        aria-label="task finished"
+                        onClick={() => handleComplete(todo.id)} />
                     <ListItemText
                         primary={todo.title}
                         style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                     />
                     <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(todo.id)}>
-                            <DeleteIcon />
+                        <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => handleDelete(todo.id)}>
+                            <DeleteOutlinedIcon style={{ color: 'red' }} />
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>

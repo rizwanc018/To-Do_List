@@ -12,12 +12,19 @@ const toDoSlice = createSlice({
             return [...state, newToDo]
         },
         deleteToDo: (state, action) => {
-            const updatedToDoList = state.filter((todo) => todo.id !== action.payload);
+            const updatedToDoList = state.filter(todo => todo.id !== action.payload);
             localStorage.setItem('toDoList', JSON.stringify(updatedToDoList))
             return updatedToDoList
         },
+        toggleComplete: (state, action) => {
+            const updatedToDoList = state.map(todo => {
+                return todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
+            })
+            localStorage.setItem('toDoList', JSON.stringify(updatedToDoList))
+            return updatedToDoList
+        }
     }
 })
 
-export const { addToDo, deleteToDo } = toDoSlice.actions
+export const { addToDo, deleteToDo, toggleComplete } = toDoSlice.actions
 export default toDoSlice.reducer
