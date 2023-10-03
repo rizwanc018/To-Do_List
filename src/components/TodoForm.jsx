@@ -1,34 +1,44 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-// import useStyles from './styles';
-
+import { useDispatch } from 'react-redux';
+import { addToDo } from '../redux/toDoSlice';
 
 const TodoForm = () => {
-    const [todoText, setTodoText] = useState('')
+    const [toDoText, setToDoText] = useState('')
+    const dispatch = useDispatch();
+
 
     const handleTodoChange = (e) => {
-        setTodoText(e.target.value);
+        setToDoText(e.target.value);
+    }
+
+    const handlesubmit = () => {
+        if (toDoText.trim()) {
+            dispatch(addToDo(toDoText));
+            setToDoText('');
+        }
     }
 
     return (
         <Box
             display='flex'
+            sx={{marginTop: '20px'}}
         >
             <TextField
                 label="Add Todo"
                 fullWidth
-                value={todoText}
+                value={toDoText}
                 placeholder='🖊️ Add todo...'
                 onChange={handleTodoChange}
 
             />
             <Button
-                type="submit"
                 color="primary"
-                variant="contained" 
+                variant="contained"
                 style={{ marginLeft: '10px' }}
-                >
+                onClick={handlesubmit}
+            >
                 <AddIcon />
             </Button>
         </Box>
