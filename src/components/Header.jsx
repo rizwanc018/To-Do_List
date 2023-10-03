@@ -1,12 +1,20 @@
-import { AppBar, Toolbar, CssBaseline } from "@mui/material"
+import { AppBar, Toolbar, Typography, Box } from "@mui/material"
 
 const Header = () => {
     return (
         <>
-            {/* <CssBaseline /> */}
-            <AppBar>
+            <AppBar position="relative" col>
                 <Toolbar>
-                    To-Do List
+                    <Box
+                        component="img"
+                        sx={{
+                            height: 30,
+                            width: 30,
+                        }}
+                        alt="logo"
+                        src="/img1.png"
+                    />
+                    <Typography style={{ fontWeight: 700, marginLeft: '10px' }}>To-Do List</Typography>
                 </Toolbar>
             </AppBar>
         </>

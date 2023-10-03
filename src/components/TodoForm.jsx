@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Box, TextField, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from 'react-redux';
@@ -7,7 +7,6 @@ import { addToDo } from '../redux/toDoSlice';
 const TodoForm = () => {
     const [toDoText, setToDoText] = useState('')
     const dispatch = useDispatch();
-
 
     const handleTodoChange = (e) => {
         setToDoText(e.target.value);
@@ -31,7 +30,6 @@ const TodoForm = () => {
                 value={toDoText}
                 placeholder='🖊️ Add todo...'
                 onChange={handleTodoChange}
-
             />
             <Button
                 color="primary"
