@@ -1,5 +1,6 @@
 import { Container, Typography } from '@mui/material'
 import TodoForm from './components/TodoForm'
+import TodoList from './components/TodoList'
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
         To-Do List
       </Typography>
       <TodoForm />
+      <TodoList />
     </Container>
   )
 }

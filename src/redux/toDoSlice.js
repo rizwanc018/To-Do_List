@@ -1,19 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    toDoList: localStorage.getItem('toDoList') ? JSON.parse(localStorage.getItem('toDoList')) : []
-}
+const initialState = localStorage.getItem('toDoList') ? JSON.parse(localStorage.getItem('toDoList')) : []
 
 const toDoSlice = createSlice({
     name: 'todos',
     initialState,
     reducers: {
         addToDo: (state, action) => {
-            state.toDoList = [...state.toDoList, { id: Date.now(), title: action.payload, completed: false }]
-            localStorage.setItem('toDoList', JSON.stringify(state))
-        }
+            const newToDo = { id: Date.now(), title: action.payload, completed: false };
+            localStorage.setItem('toDoList', JSON.stringify([...state, newToDo]))
+            return [...state, newToDo]
+        },
+        deleteToDo: (state, action) => {
+            const updatedToDoList = state.filter((todo) => todo.id !== action.payload);
+            localStorage.setItem('toDoList', JSON.stringify(updatedToDoList))
+            return updatedToDoList
+        },
     }
 })
 
-export const { addToDo } = toDoSlice.actions
+export const { addToDo, deleteToDo } = toDoSlice.actions
 export default toDoSlice.reducer
