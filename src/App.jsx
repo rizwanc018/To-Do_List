@@ -1,4 +1,5 @@
 import { Container, Typography } from '@mui/material'
+import TodoForm from './components/TodoForm'
 
 const App = () => {
   return (
@@ -6,7 +7,7 @@ const App = () => {
       <Typography variant="h4" align="center" style={{ marginTop: '20px' }}>
         To-Do List
       </Typography>
-
+      <TodoForm />
     </Container>
   )
 }
